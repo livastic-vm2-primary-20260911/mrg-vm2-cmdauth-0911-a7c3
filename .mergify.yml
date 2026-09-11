@@ -2,3 +2,11 @@ queue_rules:
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
+
+pull_request_rules:
+  - name: vm2 provenance marker
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+    actions:
+      comment:
+        message: VM2-PROVENANCE-MARKER-HEAD-ONLY
