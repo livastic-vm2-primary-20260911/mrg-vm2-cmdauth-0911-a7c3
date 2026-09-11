@@ -2,3 +2,5 @@
 VM2 authorized Mergify command authorization research
 
 base-marker: main-advanced-after-head
+
+outsider-fork-marker: vm2-secondary-queue-probe
