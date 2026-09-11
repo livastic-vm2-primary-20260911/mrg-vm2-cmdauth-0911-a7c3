@@ -1,3 +1,5 @@
+extends: mrg-vm2-sharedcfg-0911-c4e8
+
 queue_rules:
   - name: default
     merge_conditions:
