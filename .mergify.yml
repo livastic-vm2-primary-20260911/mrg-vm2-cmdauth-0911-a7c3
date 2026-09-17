@@ -1,5 +1,7 @@
-extends: mrg-vm2-sharedcfg-0911-c4e8
-
+merge_protections:
+  - name: VM2 local invalid-config stale check A9F4
+    success_conditions:
+      - title = VM2_LOCAL_INVALID_CONFIG_A9F4
 queue_rules:
   - name: default
     merge_conditions:
