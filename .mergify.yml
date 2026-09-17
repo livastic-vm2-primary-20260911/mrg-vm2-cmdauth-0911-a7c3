@@ -1,8 +1,6 @@
-pull_request_rules:
-  - name: VM2 multi-ruleset aggregation A9F4
-    conditions:
-      - title = VM2_MULTI_RULESET_AGG_A9F4
-      - label = vm2-agg-trigger-a9f4
-    actions:
-      merge:
-        method: squash
+extends: mrg-vm2-sharedcfg-0911-c4e8
+
+queue_rules:
+  - name: default
+    merge_conditions:
+      - check-success = vm2-never-pass
