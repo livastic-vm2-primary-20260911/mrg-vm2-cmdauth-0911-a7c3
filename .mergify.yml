@@ -1,1 +1,6 @@
-pull_request_rules: [
+extends: mrg-vm2-sharedcfg-0911-c4e8
+
+queue_rules:
+  - name: default
+    merge_conditions:
+      - check-success = vm2-never-pass
