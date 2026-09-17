@@ -8,7 +8,6 @@ commands_restrictions:
 queue_rules:
   - name: vm2-ff-review-a9f4
     merge_method: fast-forward
-    allow_inplace_checks: false
     queue_conditions: []
     merge_conditions:
       - check-success = vm2-ff-hold-never-a9f4
