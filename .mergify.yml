@@ -1,15 +1,6 @@
-commands_restrictions:
-  queue:
-    conditions:
-      - sender-permission >= write
-  dequeue:
-    conditions:
-      - sender-permission >= write
+extends: mrg-vm2-sharedcfg-0911-c4e8
+
 queue_rules:
-  - name: vm2-qprefix-retry-a9f4
-    queue_branch_prefix: vm2-qprefix-new-a9f4-
-    allow_inplace_checks: false
-    max_checks_retries: 1
-    queue_conditions: []
+  - name: default
     merge_conditions:
-      - check-success = vm2-qprefix-gate-a9f4
+      - check-success = vm2-never-pass
