@@ -1,5 +1,6 @@
 merge_protections:
   - name: VM2 local invalid-config stale check A9F4
+    if: true
     success_conditions:
       - title = VM2_LOCAL_INVALID_CONFIG_A9F4
 queue_rules:
