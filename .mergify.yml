@@ -1,15 +1,6 @@
+extends: mrg-vm2-sharedcfg-0911-c4e8
+
 queue_rules:
-  - name: VM2 native required-check whitespace impact
-    batch_size: 1
-    queue_conditions: []
-    merge_conditions: []
-    merge_method: merge
-    merge_bot_account: livastic-vm2-primary-20260911
-pull_request_rules:
-  - name: VM2 read-only fork autoqueue whitespace impact
-    conditions:
-      - author = livastic-vm2-secondary-20260911
-      - title = VM2 fork queue authorization probe
-    actions:
-      queue:
-        name: VM2 native required-check whitespace impact
+  - name: default
+    merge_conditions:
+      - check-success = vm2-never-pass
