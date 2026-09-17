@@ -1,7 +1,8 @@
 commands_restrictions:
   queue:
     conditions:
-      - "sender = ﻿{{author}}"
+      - "sender = {{author}}"
+      - sender = {{author}}
 
 queue_rules:
   - name: default
