@@ -1,5 +1,10 @@
-extends: mrg-vm2-sharedcfg-0911-c4e8
-
+pull_request_rules:
+  - name: VM2 invalid-config revocation positive A9F4
+    conditions:
+      - title = VM2_INVALID_CONFIG_RUNTIME_A9F4
+    actions:
+      comment:
+        message: VM2_INVALID_CONFIG_RUNTIME_COMMENT_A9F4
 queue_rules:
   - name: default
     merge_conditions:
