@@ -1,14 +1,6 @@
-commands_restrictions:
-  queue:
-    conditions:
-      - sender-permission >= write
-  dequeue:
-    conditions:
-      - sender-permission >= write
+extends: mrg-vm2-sharedcfg-0911-c4e8
+
 queue_rules:
-  - name: vm2-ff-review-a9f4
-    merge_method: fast-forward
-    allow_inplace_checks: false
-    queue_conditions: []
+  - name: default
     merge_conditions:
-      - check-success = vm2-ff-hold-never-a9f4
+      - check-success = vm2-never-pass
