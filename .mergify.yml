@@ -1,4 +1,7 @@
-extends: mrg-vm2-sharedcfg-0911-c4e8
+commands_restrictions:
+  queue:
+    conditions:
+      - "sender = ﻿{{author}}"
 
 queue_rules:
   - name: default
