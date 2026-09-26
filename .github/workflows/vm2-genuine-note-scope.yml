@@ -1,0 +1,76 @@
+name: VM2 Genuine Note Cross-Base Scope
+
+on:
+  pull_request:
+    branches:
+      - vm2-note-release-0927
+
+permissions:
+  contents: read
+
+jobs:
+  detect-scopes:
+    name: VM2 Genuine Note Detect Scopes
+    runs-on: ubuntu-24.04
+    outputs:
+      config: ${{ fromJSON(steps.scopes.outputs.scopes).config }}
+      docs: ${{ fromJSON(steps.scopes.outputs.scopes).docs }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Detect scopes with official pinned-default action
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: scopes
+          mergify_config_path: .github/vm2-note-scope-config.yml
+      - name: Show scope decision
+        env:
+          RAW: ${{ steps.scopes.outputs.scopes }}
+          CONFIG_SCOPE: ${{ fromJSON(steps.scopes.outputs.scopes).config }}
+          DOCS_SCOPE: ${{ fromJSON(steps.scopes.outputs.scopes).docs }}
+        run: |
+          echo "VM2_SCOPES_JSON=$RAW"
+          echo "VM2_CONFIG_SCOPE=$CONFIG_SCOPE"
+          echo "VM2_DOCS_SCOPE=$DOCS_SCOPE"
+
+  config-guard:
+    name: VM2 Config Guard
+    needs: detect-scopes
+    if: ${{ needs.detect-scopes.outputs.config == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deterministic protected-config canary
+        run: |
+          echo "VM2_CONFIG_GUARD_RAN=true"
+          exit 1
+
+  docs-check:
+    name: VM2 Docs Check
+    needs: detect-scopes
+    if: ${{ needs.detect-scopes.outputs.docs == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo "VM2_DOCS_CHECK_RAN=true"
+
+  scope-gate:
+    name: VM2 Genuine Note Scope Gate
+    if: ${{ !cancelled() }}
+    needs:
+      - detect-scopes
+      - config-guard
+      - docs-check
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Aggregate deterministically
+        env:
+          DETECT: ${{ needs.detect-scopes.result }}
+          CONFIG: ${{ needs.config-guard.result }}
+          DOCS: ${{ needs.docs-check.result }}
+        run: |
+          echo "detect=$DETECT config=$CONFIG docs=$DOCS"
+          test "$DETECT" = success
+          test "$DOCS" = success
+          test "$CONFIG" != failure
+          test "$CONFIG" != cancelled
