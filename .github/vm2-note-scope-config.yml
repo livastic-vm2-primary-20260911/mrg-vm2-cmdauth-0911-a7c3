@@ -1,0 +1,9 @@
+scopes:
+  source:
+    files:
+      config:
+        include:
+          - .mergify.yml
+      docs:
+        include:
+          - README.md
