@@ -1,6 +1,38 @@
-extends: mrg-vm2-sharedcfg-0911-c4e8
+scopes:
+  source:
+    manual:
 
-queue_rules:
-  - name: default
-    merge_conditions:
-      - check-success = vm2-never-pass
+pull_request_rules:
+  - name: VM2 R55C safe docs observer
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_R55C_SAFE_20260929
+      - base = vm2-r55c-safe-base-20260929
+      - scope = docs
+      - -scope = critical
+    actions:
+      comment:
+        message: VM2_R55C_SAFE_DOCS_SEEN_20260929
+
+  - name: VM2 R55C truthful critical observer
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_R55C_GATE_20260929
+      - base = main
+      - scope = critical
+    actions:
+      comment:
+        message: VM2_R55C_TRUTHFUL_CRITICAL_SEEN_20260929
+
+  - name: VM2 R55C stale docs allow protected merge
+    conditions:
+      - author = livastic-vm2-secondary-20260911
+      - title = VM2_R55C_GATE_20260929
+      - base = main
+      - scope = docs
+      - -scope = critical
+    actions:
+      comment:
+        message: VM2_R55C_STALE_SCOPE_ALLOW_20260929
+      merge:
+        method: merge
