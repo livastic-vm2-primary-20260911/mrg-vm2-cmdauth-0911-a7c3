@@ -1,0 +1,28 @@
+name: VM2 Product Disable AutoRetry 0929
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - vm2-productoff-autoretry-trigger.txt
+
+permissions:
+  contents: read
+
+jobs:
+  productoff-autoretry:
+    name: vm2-productoff-autoretry-0929
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delay for product revocation
+        run: sleep 120
+      - name: Fail attempt one and pass a Mergify retry
+        shell: bash
+        run: |
+          echo "VM2_RUN_ATTEMPT=$GITHUB_RUN_ATTEMPT"
+          if [ "$GITHUB_RUN_ATTEMPT" = "1" ]; then
+            echo "VM2_PRODUCTOFF_EXPECTED_FAILURE=true"
+            exit 1
+          fi
+          echo "VM2_PRODUCTOFF_RETRY_SUCCESS=true"
