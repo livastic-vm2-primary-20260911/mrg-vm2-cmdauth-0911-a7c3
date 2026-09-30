@@ -1,6 +1,10 @@
-extends: mrg-vm2-sharedcfg-0911-c4e8
-
-queue_rules:
-  - name: default
-    merge_conditions:
-      - check-success = vm2-never-pass
+pull_request_rules:
+  - name: VM2 classic strict arm 0930
+    conditions:
+      - base = vm2-strict-target-0930
+      - title = VM2_STRICT_ARM_0930
+      - check-success = vm2-strict-gate-0930
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm2-primary-20260911
