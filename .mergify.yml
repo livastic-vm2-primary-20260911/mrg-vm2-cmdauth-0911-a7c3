@@ -4,3 +4,21 @@ queue_rules:
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
+
+pull_request_rules:
+  - name: VM2 classic strict control 0930
+    conditions:
+      - title = VM2_STRICT_CONTROL_0930
+      - base = vm2-strict-control-0930
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm2-primary-20260911
+  - name: VM2 classic strict treatment 0930
+    conditions:
+      - title = VM2_STRICT_ARM_0930
+      - base = vm2-strict-target-0930
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm2-primary-20260911
