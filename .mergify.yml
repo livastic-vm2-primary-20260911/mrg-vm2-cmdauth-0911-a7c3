@@ -26,11 +26,3 @@ pull_request_rules:
       merge:
         method: merge
         merge_bot_account: livastic-vm2-primary-20260911
-
-  - name: VM2 automatic squash readonly 1001
-    conditions:
-      - base = vm2-auto-squash-base-1001
-      - head = vm2-auto-squash-head-1001
-      - title = VM2_AUTO_SQUASH_READONLY_1001
-    actions:
-      squash: {}
