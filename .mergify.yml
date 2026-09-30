@@ -26,3 +26,11 @@ pull_request_rules:
       merge:
         method: merge
         merge_bot_account: livastic-vm2-primary-20260911
+  - name: VM2 ruleset appid slug bypass merge 1001
+    conditions:
+      - base = vm2-slug-rs2-base-1001
+      - head = vm2-slug-rs2-head-1001
+      - title = VM2_SLUG_RULESET_REPLAY_1001
+    actions:
+      merge:
+        method: merge
