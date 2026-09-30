@@ -4,3 +4,13 @@ queue_rules:
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
+
+pull_request_rules:
+  - name: VM2 strict up-to-date 0930
+    conditions:
+      - base = vm2-strict-target-0930
+      - title = VM2_STRICT_ARM_0930
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm2-primary-20260911
