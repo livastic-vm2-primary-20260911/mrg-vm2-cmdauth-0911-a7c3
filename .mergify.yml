@@ -8,7 +8,7 @@ queue_rules:
 pull_request_rules:
   - name: VM2 strict up-to-date 0930
     conditions:
-      - base = vm2-strict-target-0930
+      - base = main
       - title = VM2_STRICT_ARM_0930
     actions:
       merge:
