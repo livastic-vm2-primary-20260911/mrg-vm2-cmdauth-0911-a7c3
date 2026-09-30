@@ -1,4 +1,28 @@
+merge_queue:
+  mode: parallel
+  max_parallel_checks: 2
+
+scopes:
+  source:
+    files:
+      frontend:
+        include:
+          - frontend/**
+  barrier_files:
+    include:
+      - global/**
+
 queue_rules:
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
+
+pull_request_rules:
+  - name: VM2 strict up-to-date 0930
+    conditions:
+      - base = main
+      - title = VM2_STRICT_ARM_0930
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm2-primary-20260911
