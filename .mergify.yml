@@ -1,3 +1,17 @@
+merge_queue:
+  mode: parallel
+  max_parallel_checks: 2
+
+scopes:
+  source:
+    files:
+      frontend:
+        include:
+          - frontend/**
+  barrier_files:
+    include:
+      - global/**
+
 queue_rules:
   - name: default
     merge_conditions:
