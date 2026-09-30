@@ -1,0 +1,41 @@
+name: VM2 Branch Provenance 0930C
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  trigger:
+    if: startsWith(github.event.pull_request.title, 'VM2_BRANCHPROV_0930C_')
+    name: vm2-branchprov-victim-0930c
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record trusted metadata and fail only attempt one
+        env:
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          echo "PR_HEAD_REF=$PR_HEAD_REF"
+          echo "PR_HEAD_REPO=$PR_HEAD_REPO"
+          echo "PR_BASE_REF=$PR_BASE_REF"
+          echo "RUN_ATTEMPT=$GITHUB_RUN_ATTEMPT"
+          if [ "$GITHUB_RUN_ATTEMPT" = "1" ]; then
+            exit 1
+          fi
+
+  write-side-effect:
+    if: startsWith(github.event.pull_request.title, 'VM2_BRANCHPROV_0930C_')
+    name: vm2-branchprov-write-0930c
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write controlled target-side marker
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments"             -f body="VM2_BRANCHPROV_SIDE_EFFECT attempt=$GITHUB_RUN_ATTEMPT run=$GITHUB_RUN_ID"
