@@ -12,13 +12,3 @@ pull_request_rules:
       merge:
         method: merge
         merge_bot_account: livastic-vm2-primary-20260911
-
-  - name: VM2 cancelled failure race 0930
-    conditions:
-      - base = main
-      - title = VM2_CANCEL_RACE_ARM_0930
-      - check-failure = @github-actions/vm2-cancel-race-check
-      - -check-cancelled = @github-actions/vm2-cancel-race-check
-    actions:
-      comment:
-        message: VM2_CANCEL_RACE_FIRED_0930
