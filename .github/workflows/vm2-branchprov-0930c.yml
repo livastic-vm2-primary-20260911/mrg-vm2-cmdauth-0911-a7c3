@@ -11,7 +11,7 @@ permissions:
 jobs:
   trigger:
     if: startsWith(github.event.pull_request.title, 'VM2_BRANCHPROV_0930C_')
-    name: vm2-branchprov-victim-0930c
+    name: vm2-branchprov-trigger
     runs-on: ubuntu-latest
     steps:
       - name: Record trusted metadata and fail only attempt one
@@ -30,7 +30,7 @@ jobs:
 
   write-side-effect:
     if: startsWith(github.event.pull_request.title, 'VM2_BRANCHPROV_0930C_')
-    name: vm2-branchprov-write-0930c
+    name: vm2-branchprov-write-side-effect
     runs-on: ubuntu-latest
     steps:
       - name: Write controlled target-side marker
