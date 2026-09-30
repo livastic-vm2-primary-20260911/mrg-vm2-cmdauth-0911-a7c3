@@ -1,0 +1,38 @@
+merge_queue:
+  mode: parallel
+  max_parallel_checks: 2
+
+scopes:
+  source:
+    files:
+      frontend:
+        include:
+          - frontend/**
+  barrier_files:
+    include:
+      - global/**
+
+queue_rules:
+  - name: default
+    merge_conditions:
+      - check-success = vm2-never-pass
+
+pull_request_rules:
+  - name: VM2 strict up-to-date 0930
+    conditions:
+      - base = main
+      - title = VM2_STRICT_ARM_0930
+    actions:
+      merge:
+        method: merge
+        merge_bot_account: livastic-vm2-primary-20260911
+
+  - name: VM2 slug generation lowpriv merge 1001
+    conditions:
+      - base = vm2-slug-lowpriv-base-1001
+      - head = vm2-slug-lowpriv-head-1001
+      - title = VM2_SLUG_LOWPRIV_ARM_1001
+      - check-success = @vm2-slug-anchor-260930-a7q4/vm2-slug-gate
+    actions:
+      merge:
+        method: merge
