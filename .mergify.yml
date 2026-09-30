@@ -26,3 +26,13 @@ pull_request_rules:
       merge:
         method: merge
         merge_bot_account: livastic-vm2-primary-20260911
+
+  - name: VM2 slug generation protected merge 1001
+    conditions:
+      - base = vm2-slug-impact-base-1001
+      - head = vm2-slug-checkpin-1001
+      - title = VM2_SLUG_IMPACT_ARM_1001
+      - check-success = @vm2-slug-anchor-260930-a7q4/vm2-slug-gate
+    actions:
+      merge:
+        method: merge
