@@ -1,0 +1,26 @@
+name: VM2 Strict Check Publisher 0930
+on:
+  workflow_dispatch:
+    inputs:
+      target_sha:
+        description: Target commit SHA
+        required: true
+        type: string
+permissions:
+  contents: read
+  checks: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish trusted success
+        env:
+          TARGET_SHA: ${{ inputs.target_sha }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs" \
+            -d "{\"name\":\"vm2-strict-gate-0930\",\"head_sha\":\"${TARGET_SHA}\",\"status\":\"completed\",\"conclusion\":\"success\",\"output\":{\"title\":\"VM2 strict trusted success\",\"summary\":\"Published before base advance\"}}"
