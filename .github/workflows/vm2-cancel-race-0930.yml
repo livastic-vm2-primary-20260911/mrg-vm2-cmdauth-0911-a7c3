@@ -1,0 +1,17 @@
+name: VM2 Cancel Race 0930
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-cancel-race-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hold then fail
+        run: |
+          echo VM2_CANCEL_RACE_START
+          sleep 90
+          echo VM2_CANCEL_RACE_FAIL
+          exit 1
