@@ -13,6 +13,11 @@ scopes:
       - global/**
 
 queue_rules:
+  - name: vm2 barrier root 1001
+    queue_conditions:
+      - title = VM2_BARRIER_ROOT_1001
+    merge_conditions:
+      - check-success = vm2-barrier-ci-gate
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
