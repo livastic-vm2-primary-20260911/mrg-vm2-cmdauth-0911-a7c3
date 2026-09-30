@@ -1,0 +1,12 @@
+name: VM2 Strict Gate 0930
+on:
+  pull_request:
+    branches: [vm2-strict-target-0930]
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-strict-gate-0930
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo VM2_STRICT_GATE_OK
