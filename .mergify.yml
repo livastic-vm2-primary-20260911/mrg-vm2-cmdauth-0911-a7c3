@@ -15,6 +15,12 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+  - name: VM2 synthetic token trust 1002
+    queue_conditions:
+      - base = vm2-synth-token-target-1002
+    merge_conditions:
+      - check-success = vm2-never-pass
+    batch_size: 1
   - name: VM2 barrier cli protected sink 1001
     queue_conditions:
       - base = vm2-barrier-cli-target-1001
@@ -32,6 +38,12 @@ queue_rules:
       - check-success = vm2-never-pass
 
 pull_request_rules:
+  - name: VM2 synthetic token autoqueue 1002
+    conditions:
+      - base = vm2-synth-token-target-1002
+    actions:
+      queue:
+        name: VM2 synthetic token trust 1002
   - name: VM2 skip intermediate autoqueue 1002
     conditions:
       - base = vm2-skipint-target-1002
