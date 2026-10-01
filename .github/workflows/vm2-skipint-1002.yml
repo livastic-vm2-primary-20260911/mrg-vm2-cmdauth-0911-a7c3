@@ -1,0 +1,28 @@
+name: VM2 Skip Intermediate 1002
+
+on:
+  pull_request:
+    branches:
+      - vm2-skipint-target-1002
+    paths:
+      - 'frontend/vm2-skipint-*'
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: vm2-skipint-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Controlled downstream gate
+        shell: bash
+        run: |
+          if [ -f frontend/vm2-skipint-heal-b.txt ]; then
+            echo 'VM2_SKIPINT_DOWNSTREAM_HEAL=1'
+            exit 0
+          fi
+          echo 'VM2_SKIPINT_ANCESTOR_PENDING=1'
+          sleep 120
+          exit 1

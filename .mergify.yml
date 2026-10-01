@@ -1,6 +1,7 @@
 merge_queue:
   mode: parallel
   max_parallel_checks: 2
+  skip_intermediate_results: true
 
 scopes:
   source:
@@ -20,11 +21,23 @@ queue_rules:
       - author = dependabot[bot]
     merge_conditions:
       - check-success = ci-gate
+  - name: VM2 skip intermediate 1002
+    queue_conditions:
+      - base = vm2-skipint-target-1002
+    merge_conditions:
+      - check-success = vm2-skipint-gate
+    batch_size: 1
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
 
 pull_request_rules:
+  - name: VM2 skip intermediate autoqueue 1002
+    conditions:
+      - base = vm2-skipint-target-1002
+    actions:
+      queue:
+        name: VM2 skip intermediate 1002
   - name: VM2 barrier cli autoqueue 1001
     conditions:
       - base = vm2-barrier-cli-target-1001
