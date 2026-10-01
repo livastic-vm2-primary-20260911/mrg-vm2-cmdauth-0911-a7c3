@@ -7,5 +7,5 @@ jobs:
   marker:
     runs-on: ubuntu-latest
     steps:
-      - uses: livastic-vm2-secondary-20260911/vm2-dep-action-0914-k7m3@v1.0.0
+      - uses: livastic-vm2-lab-20260911-g3a9/shared-policy-impact-evidence-2@v1.0.0
       - run: echo VM2_SLUG_DEPENDABOT_1001C=1
