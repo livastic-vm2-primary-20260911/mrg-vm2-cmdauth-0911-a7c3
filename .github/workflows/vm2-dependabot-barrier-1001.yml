@@ -1,0 +1,14 @@
+name: VM2 Dependabot Barrier 1001
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-marker:
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: livastic-vm2-secondary-20260911/vm2-dep-action-0914-k7m3@v1.0.0
+      - run: echo 'VM2_DEPENDABOT_BARRIER_1001=1'
