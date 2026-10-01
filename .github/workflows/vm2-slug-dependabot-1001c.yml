@@ -1,0 +1,11 @@
+name: VM2 Slug Dependabot 1001C
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: livastic-vm2-secondary-20260911/vm2-dep-action-0914-k7m3@v1.0.0
+      - run: echo VM2_SLUG_DEPENDABOT_1001C=1
