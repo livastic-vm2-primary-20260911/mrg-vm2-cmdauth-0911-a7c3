@@ -7,4 +7,4 @@ updates:
     target-branch: vm2-slug-dependabot-base-1001c
     open-pull-requests-limit: 1
     allow:
-      - dependency-name: livastic-vm2-secondary-20260911/vm2-dep-action-0914-k7m3
+      - dependency-name: livastic-vm2-lab-20260911-g3a9/shared-policy-impact-evidence-2
