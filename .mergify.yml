@@ -13,11 +13,24 @@ scopes:
       - global/**
 
 queue_rules:
+  - name: VM2 barrier cli protected sink 1001
+    queue_conditions:
+      - base = vm2-barrier-cli-target-1001
+      - title = VM2_BARRIER_CLI_LOWPRIV_1001
+    merge_conditions:
+      - check-success = ci-gate
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
 
 pull_request_rules:
+  - name: VM2 barrier cli autoqueue 1001
+    conditions:
+      - base = vm2-barrier-cli-target-1001
+      - title = VM2_BARRIER_CLI_LOWPRIV_1001
+    actions:
+      queue:
+        name: VM2 barrier cli protected sink 1001
   - name: VM2 strict up-to-date 0930
     conditions:
       - base = main
