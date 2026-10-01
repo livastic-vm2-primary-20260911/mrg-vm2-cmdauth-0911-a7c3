@@ -21,6 +21,12 @@ queue_rules:
     merge_conditions:
       - check-success = ci-gate
   - name: default
+    batch_size: 2
+    merge_method: merge-batch
+    conflict_resolvers:
+      - paths:
+          - vm2-resolver-target-1002.txt
+        strategy: prefer-theirs
     merge_conditions:
       - check-success = vm2-never-pass
 
