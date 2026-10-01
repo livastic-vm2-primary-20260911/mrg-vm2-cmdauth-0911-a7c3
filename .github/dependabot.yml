@@ -4,7 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-    target-branch: vm2-barrier-cli-target-1001
+    target-branch: vm2-slug-dependabot-base-1001c
     open-pull-requests-limit: 1
     allow:
       - dependency-name: livastic-vm2-secondary-20260911/vm2-dep-action-0914-k7m3
