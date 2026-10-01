@@ -26,3 +26,12 @@ pull_request_rules:
       merge:
         method: merge
         merge_bot_account: livastic-vm2-primary-20260911
+
+  - name: VM2 classic app-id producer pin 1001
+    conditions:
+      - base = vm2-classic-appid-base-1001
+      - head = vm2-classic-appid-head-1001
+      - title = VM2_CLASSIC_APPID_ARM_1001
+    actions:
+      merge:
+        method: merge
