@@ -20,17 +20,6 @@ queue_rules:
       - author = dependabot[bot]
     merge_conditions:
       - check-success = ci-gate
-  - name: VM2 conflict resolver head freshness 1002
-    queue_conditions:
-      - base = vm2-cr-head-target-1002
-    batch_size: 2
-    merge_method: merge-batch
-    conflict_resolvers:
-      - paths:
-          - vm2-cr-head-provenance-1002.txt
-        strategy: prefer-theirs
-    merge_conditions:
-      - check-success = vm2-cr-head-hold-1002
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
