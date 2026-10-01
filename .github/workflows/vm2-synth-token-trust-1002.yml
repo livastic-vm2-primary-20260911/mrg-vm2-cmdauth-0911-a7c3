@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - "vm2-synth-token-probe/**"
-      - ".github/workflows/vm2-synth-dep-target-1002.yml"
 
 permissions:
   contents: write
