@@ -1,0 +1,11 @@
+name: VM2 Synthetic Dependabot Target 1002
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  marker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: livastic-vm2-lab-20260911-g3a9/shared-policy-impact-evidence-2@v1.0.0
+      - run: echo VM2_SYNTH_DEP_TARGET_1002=1
