@@ -48,15 +48,3 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-  - name: VM2 copy stale-head race 1002
-    conditions:
-      - base = main
-      - author = livastic-vm2-secondary-20260911
-      - title = VM2_COPY_RACE_1002
-      - check-success = vm2-copy-race-gate
-    actions:
-      copy:
-        branches:
-          - vm2-copy-race-dst-1002
-        title: VM2 copy stale-head race {{ number }}
-        body: Controlled VM2 copy stale-head race discriminator.
