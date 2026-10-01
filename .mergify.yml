@@ -2,14 +2,15 @@ merge_queue:
   mode: serial
 queue_rules:
   - name: manual-first
-    autoqueue: false
     queue_conditions:
       - title = VM2_MIGRATE_OVERLAP_1001
     merge_conditions:
       - check-success = vm2-never-pass
   - name: auto-later
-    autoqueue: true
     queue_conditions:
       - title = VM2_MIGRATE_OVERLAP_1001
     merge_conditions:
       - check-success = vm2-never-pass
+merge_protections_settings:
+  auto_merge_conditions:
+    - title = VM2_MIGRATE_OVERLAP_1001
