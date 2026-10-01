@@ -26,3 +26,12 @@ pull_request_rules:
       merge:
         method: merge
         merge_bot_account: livastic-vm2-primary-20260911
+
+  - name: VM2 slug lowpriv ruleset 1001b
+    conditions:
+      - base = vm2-slug-lowpriv-base-1001b
+      - head = vm2-slug-lowpriv-head-1001b
+      - title = VM2_SLUG_LOWPRIV_RULESET_1001B
+    actions:
+      merge:
+        method: merge
