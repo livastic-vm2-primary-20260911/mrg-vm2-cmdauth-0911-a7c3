@@ -48,16 +48,3 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-  - name: VM2 copy stale head race 1002
-    conditions:
-      - base = main
-      - author = livastic-vm2-secondary-20260911
-      - title = VM2_COPY_STALE_HEAD_1002
-      - check-success = vm2-copy-race-gate-1002
-    actions:
-      copy:
-        branches:
-          - vm2-copy-race-dest-1002
-        title: "VM2_COPY_RESULT_1002 {{ title }}"
-        report_mode:
-          - comment
