@@ -24,7 +24,6 @@ queue_rules:
     queue_conditions:
       - base = vm2-cr-head-target-1002
     batch_size: 2
-    batch_max_wait_time: 5 min
     merge_method: merge-batch
     conflict_resolvers:
       - paths:
