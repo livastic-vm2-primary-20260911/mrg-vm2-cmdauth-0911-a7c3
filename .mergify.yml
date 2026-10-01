@@ -11,12 +11,13 @@ scopes:
   barrier_files:
     include:
       - global/**
+      - .github/workflows/**
 
 queue_rules:
   - name: VM2 barrier cli protected sink 1001
     queue_conditions:
       - base = vm2-barrier-cli-target-1001
-      - title = VM2_BARRIER_CLI_LOWPRIV_1001
+      - author = dependabot[bot]
     merge_conditions:
       - check-success = ci-gate
   - name: default
@@ -27,7 +28,7 @@ pull_request_rules:
   - name: VM2 barrier cli autoqueue 1001
     conditions:
       - base = vm2-barrier-cli-target-1001
-      - title = VM2_BARRIER_CLI_LOWPRIV_1001
+      - author = dependabot[bot]
     actions:
       queue:
         name: VM2 barrier cli protected sink 1001
