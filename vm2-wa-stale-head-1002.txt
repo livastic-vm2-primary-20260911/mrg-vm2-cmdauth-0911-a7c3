@@ -1,0 +1,1 @@
+H0 controlled stale-head merge discriminator
