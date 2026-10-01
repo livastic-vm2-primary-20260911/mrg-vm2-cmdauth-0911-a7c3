@@ -13,6 +13,16 @@ scopes:
       - global/**
 
 queue_rules:
+  - name: vm2 barrier scoped ci 1001
+    queue_conditions:
+      - base = vm2-barrier-sink-1001
+      - title = VM2_BARRIER_SCOPE_ARM_1001
+    merge_conditions:
+      - check-success = ci-gate
+    batch_size: 1
+    autoqueue: true
+    merge_method: merge
+
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
