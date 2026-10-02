@@ -47,6 +47,7 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-crsymlink-hold-1002
     batch_size: 2
+    batch_max_wait_time: 2 minutes
     merge_method: merge-batch
     branch_protection_injection_mode: none
     merge_bot_account: livastic-vm2-primary-20260911
@@ -103,10 +104,4 @@ pull_request_rules:
       request_reviews:
         users:
           - livastic-vm2-primary-20260911
-  - name: VM2 conflict resolver symlink autoqueue 1002
-    conditions:
-      - base = vm2-crsymlink-target-1002
-    actions:
-      queue:
-        name: VM2 conflict resolver symlink type 1002
 
