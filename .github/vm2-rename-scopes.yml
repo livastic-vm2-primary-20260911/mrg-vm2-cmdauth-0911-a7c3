@@ -1,0 +1,9 @@
+scopes:
+  source:
+    files:
+      security:
+        include:
+          - critical/**
+      ignored:
+        include:
+          - ignored/**
