@@ -41,6 +41,21 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-never-pass
 
+  - name: VM2 conflict resolver member retarget 1002
+    queue_conditions:
+      - base = vm2-cr-retarget-target-1002
+    merge_conditions:
+      - check-success = vm2-cr-retarget-hold-1002
+    batch_size: 2
+    batch_max_wait_time: 5 minutes
+    branch_protection_injection_mode: none
+    merge_method: merge-batch
+    merge_bot_account: livastic-vm2-primary-20260911
+    conflict_resolvers:
+      - paths:
+          - frontend/vm2-cr-retarget-1002.txt
+        strategy: prefer-theirs
+
 pull_request_rules:
   - name: VM2 skip intermediate autoqueue 1002
     conditions:
@@ -89,3 +104,10 @@ pull_request_rules:
       request_reviews:
         users:
           - livastic-vm2-primary-20260911
+  - name: VM2 conflict resolver retarget autoqueue 1002
+    conditions:
+      - base = vm2-cr-retarget-target-1002
+    actions:
+      queue:
+        name: VM2 conflict resolver member retarget 1002
+
