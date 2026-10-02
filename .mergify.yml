@@ -29,6 +29,14 @@ queue_rules:
     batch_size: 1
     branch_protection_injection_mode: none
     merge_bot_account: livastic-vm2-primary-20260911
+  - name: VM2 freeze edit ordering 1002C
+    queue_conditions:
+      - base = vm2-freezeedit-target-1002c
+    merge_conditions:
+      - check-success = vm2-freezeedit-gate
+    batch_size: 1
+    branch_protection_injection_mode: none
+    merge_bot_account: livastic-vm2-primary-20260911
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
@@ -63,3 +71,10 @@ pull_request_rules:
     actions:
       merge:
         method: merge
+
+  - name: VM2 freeze edit autoqueue 1002C
+    conditions:
+      - base = vm2-freezeedit-target-1002c
+    actions:
+      queue:
+        name: VM2 freeze edit ordering 1002C

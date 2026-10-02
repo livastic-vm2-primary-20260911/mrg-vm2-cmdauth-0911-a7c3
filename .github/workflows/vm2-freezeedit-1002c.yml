@@ -1,0 +1,21 @@
+name: VM2 Freeze Edit 1002C
+
+on:
+  pull_request:
+    branches:
+      - vm2-freezeedit-target-1002c
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: vm2-freezeedit-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delayed green gate
+        shell: bash
+        run: |
+          echo "VM2_FREEZEEDIT_HEAD_REF=${GITHUB_HEAD_REF}"
+          sleep 70
+          echo 'VM2_FREEZEEDIT_GATE_GREEN=1'
