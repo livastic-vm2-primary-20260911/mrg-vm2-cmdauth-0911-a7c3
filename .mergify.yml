@@ -33,15 +33,6 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-never-pass
 
-  - name: VM2 skip intermediate revocation 1002B
-    queue_conditions:
-      - base = vm2-skiprev-target-1002b
-    merge_conditions:
-      - check-success = vm2-skiprev-gate
-    batch_size: 1
-    branch_protection_injection_mode: none
-    merge_bot_account: livastic-vm2-primary-20260911
-
 pull_request_rules:
   - name: VM2 skip intermediate autoqueue 1002
     conditions:
@@ -72,9 +63,3 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-  - name: VM2 skip intermediate revocation autoqueue 1002B
-    conditions:
-      - base = vm2-skiprev-target-1002b
-    actions:
-      queue:
-        name: VM2 skip intermediate revocation 1002B
