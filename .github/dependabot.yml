@@ -8,3 +8,7 @@ updates:
     open-pull-requests-limit: 1
     allow:
       - dependency-name: livastic-vm2-lab-20260911-g3a9/shared-policy-impact-evidence-2
+    cooldown:
+      default-days: 3
+      exclude:
+        - livastic-vm2-lab-20260911-g3a9/shared-policy-impact-evidence-2
