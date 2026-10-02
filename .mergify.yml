@@ -41,7 +41,7 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-never-pass
 
-  - name: VM2 conflict resolver symlink type 1002
+  - name: vm2-crsymlink-1002
     queue_conditions:
       - base = vm2-crsymlink-target-1002
     merge_conditions:
