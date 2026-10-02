@@ -9,6 +9,12 @@ scopes:
       frontend:
         include:
           - frontend/**
+      security:
+        include:
+          - critical/**
+      ignored:
+        include:
+          - ignored/**
   barrier_files:
     include:
       - global/**
@@ -89,3 +95,12 @@ pull_request_rules:
       request_reviews:
         users:
           - livastic-vm2-primary-20260911
+
+  - name: VM2 production rename engine security source 1002
+    conditions:
+      - base = vm2-rename-engine-base-1002
+      - title = VM2_RENAME_ENGINE_1002
+      - scope = security
+    actions:
+      comment:
+        message: VM2_RENAME_ENGINE_SECURITY_MATCH_1002
