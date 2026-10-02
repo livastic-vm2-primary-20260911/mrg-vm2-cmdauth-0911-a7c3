@@ -19,10 +19,14 @@ jobs:
       - name: Controlled downstream gate
         shell: bash
         run: |
+          echo "VM2_SKIPINT_HEAD_REF=${GITHUB_HEAD_REF}"
+          if [[ "${GITHUB_HEAD_REF}" != mergify/merge-queue/* ]]; then
+            echo 'VM2_SKIPINT_SOURCE_PR=1'
+            exit 0
+          fi
           if [ -f frontend/vm2-skipint-heal-b.txt ]; then
             echo 'VM2_SKIPINT_DOWNSTREAM_HEAL=1'
             exit 0
           fi
-          echo 'VM2_SKIPINT_ANCESTOR_PENDING=1'
-          sleep 600
+          echo 'VM2_SKIPINT_ANCESTOR_FAIL=1'
           exit 1
