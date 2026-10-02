@@ -1,0 +1,31 @@
+name: VM2 Skip Intermediate Revocation 1002B
+on:
+  pull_request:
+    branches:
+      - vm2-skiprev-target-1002b
+    paths:
+      - 'frontend/vm2-skiprev-*'
+permissions:
+  contents: read
+jobs:
+  gate:
+    name: vm2-skiprev-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Controlled downstream-proof gate
+        shell: bash
+        run: |
+          echo "VM2_SKIPREV_HEAD_REF=${GITHUB_HEAD_REF}"
+          if [[ "${GITHUB_HEAD_REF}" != mergify/merge-queue/* ]]; then
+            echo 'VM2_SKIPREV_SOURCE_PR=1'
+            exit 0
+          fi
+          if [ -f frontend/vm2-skiprev-heal-b.txt ]; then
+            echo 'VM2_SKIPREV_DOWNSTREAM_HEAL=1'
+            exit 0
+          fi
+          echo 'VM2_SKIPREV_ANCESTOR_PENDING=1'
+          sleep 600
+          echo 'VM2_SKIPREV_ANCESTOR_FINAL_FAIL=1'
+          exit 1
