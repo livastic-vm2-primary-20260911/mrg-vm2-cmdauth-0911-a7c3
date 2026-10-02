@@ -1,0 +1,66 @@
+name: VM2 v26 Rename Scope Gate
+on:
+  pull_request:
+    branches:
+      - vm2-v26-rename-target-1002
+permissions:
+  contents: read
+jobs:
+  detect-scopes:
+    name: VM2 Rename Detect Scopes
+    runs-on: ubuntu-24.04
+    outputs:
+      security: ${{ fromJSON(steps.scopes.outputs.scopes).security }}
+      ignored: ${{ fromJSON(steps.scopes.outputs.scopes).ignored }}
+      raw: ${{ steps.scopes.outputs.scopes }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Detect scopes with official v26 default
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v26
+        with:
+          action: scopes
+      - name: Record scope decision
+        env:
+          RAW: ${{ steps.scopes.outputs.scopes }}
+          SECURITY: ${{ fromJSON(steps.scopes.outputs.scopes).security }}
+          IGNORED: ${{ fromJSON(steps.scopes.outputs.scopes).ignored }}
+        run: |
+          echo "VM2_RENAME_SCOPES=$RAW"
+          echo "VM2_RENAME_SECURITY=$SECURITY"
+          echo "VM2_RENAME_IGNORED=$IGNORED"
+  security-tests:
+    name: VM2 Rename Security Tests
+    needs: detect-scopes
+    if: ${{ needs.detect-scopes.outputs.security == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deterministic security guard
+        run: |
+          echo VM2_SECURITY_GUARD_RAN=yes
+          echo VM2_SECURITY_GUARD_BLOCKS_RENAME_OR_DELETE=yes
+          exit 1
+  ci-gate:
+    name: VM2 Rename CI Gate
+    if: ${{ always() }}
+    needs:
+      - detect-scopes
+      - security-tests
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Enforce required security job without wait-jobs
+        env:
+          DETECT_RESULT: ${{ needs.detect-scopes.result }}
+          SECURITY_SCOPE: ${{ needs.detect-scopes.outputs.security }}
+          SECURITY_RESULT: ${{ needs.security-tests.result }}
+        run: |
+          echo "VM2_DETECT_RESULT=$DETECT_RESULT"
+          echo "VM2_SECURITY_SCOPE=$SECURITY_SCOPE"
+          echo "VM2_SECURITY_RESULT=$SECURITY_RESULT"
+          test "$DETECT_RESULT" = success
+          if [ "$SECURITY_SCOPE" = true ]; then
+            test "$SECURITY_RESULT" = success
+          fi
+          echo VM2_RENAME_CI_GATE=green

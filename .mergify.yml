@@ -1,91 +1,9 @@
-merge_queue:
-  mode: parallel
-  max_parallel_checks: 2
-  skip_intermediate_results: true
-
 scopes:
   source:
     files:
-      frontend:
+      security:
         include:
-          - frontend/**
-  barrier_files:
-    include:
-      - global/**
-      - .github/workflows/**
-
-queue_rules:
-  - name: VM2 barrier cli protected sink 1001
-    queue_conditions:
-      - base = vm2-barrier-cli-target-1001
-      - author = dependabot[bot]
-    merge_conditions:
-      - check-success = ci-gate
-  - name: VM2 skip intermediate 1002
-    queue_conditions:
-      - base = vm2-skipint-target-1002
-    merge_conditions:
-      - check-success = vm2-skipint-gate
-    batch_size: 1
-    branch_protection_injection_mode: none
-    merge_bot_account: livastic-vm2-primary-20260911
-  - name: VM2 freeze edit ordering 1002C
-    queue_conditions:
-      - base = vm2-freezeedit-target-1002c
-    merge_conditions:
-      - check-success = vm2-freezeedit-gate
-    batch_size: 1
-    branch_protection_injection_mode: none
-    merge_bot_account: livastic-vm2-primary-20260911
-  - name: default
-    merge_conditions:
-      - check-success = vm2-never-pass
-
-pull_request_rules:
-  - name: VM2 skip intermediate autoqueue 1002
-    conditions:
-      - base = vm2-skipint-target-1002
-    actions:
-      queue:
-        name: VM2 skip intermediate 1002
-  - name: VM2 barrier cli autoqueue 1001
-    conditions:
-      - base = vm2-barrier-cli-target-1001
-      - author = dependabot[bot]
-    actions:
-      queue:
-        name: VM2 barrier cli protected sink 1001
-  - name: VM2 strict up-to-date 0930
-    conditions:
-      - base = main
-      - title = VM2_STRICT_ARM_0930
-    actions:
-      merge:
-        method: merge
-        merge_bot_account: livastic-vm2-primary-20260911
-  - name: VM2 slug generation dependabot lowpriv 1001c
-    conditions:
-      - base = vm2-slug-dependabot-base-1001c
-      - author = dependabot[bot]
-      - check-success = @vm2-slug-moved-260930-a7q4/vm2-slug-gate
-    actions:
-      merge:
-        method: merge
-
-  - name: VM2 freeze edit autoqueue 1002C
-    conditions:
-      - base = vm2-freezeedit-target-1002c
-    actions:
-      queue:
-        name: VM2 freeze edit ordering 1002C
-
-  - name: VM2 request reviews stale head 1002
-    conditions:
-      - base = main
-      - author = livastic-vm2-secondary-20260911
-      - title = VM2_REQREV_RACE_1002
-      - check-success = vm2-reqrev-race-gate
-    actions:
-      request_reviews:
-        users:
-          - livastic-vm2-primary-20260911
+          - critical/**
+      ignored:
+        include:
+          - ignored/**
