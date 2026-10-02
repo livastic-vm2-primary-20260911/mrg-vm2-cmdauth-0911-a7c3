@@ -1,0 +1,52 @@
+name: VM2 Rename Scope Gate 1002
+
+on:
+  pull_request:
+    branches:
+      - vm2-rename-base-1002
+
+permissions:
+  contents: read
+
+jobs:
+  scopes:
+    name: vm2-rename-scope-detect
+    runs-on: ubuntu-latest
+    outputs:
+      scopes: ${{ steps.mergify.outputs.scopes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: mergify
+        uses: Mergifyio/gha-mergify-ci@v26
+        with:
+          action: scopes
+          mergify_config_path: .github/vm2-rename-scopes.yml
+
+  security:
+    name: vm2-rename-security
+    needs: scopes
+    if: ${{ fromJSON(needs.scopes.outputs.scopes).security == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Security sentinel must block
+        run: |
+          echo VM2_RENAME_SECURITY_SCOPE_EXECUTED
+          exit 1
+
+  gate:
+    name: vm2-rename-gate
+    if: ${{ always() }}
+    needs: [scopes, security]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Aggregate
+        env:
+          SCOPES_RESULT: ${{ needs.scopes.result }}
+          SECURITY_RESULT: ${{ needs.security.result }}
+        run: |
+          echo "scopes=$SCOPES_RESULT security=$SECURITY_RESULT"
+          test "$SCOPES_RESULT" = success
+          test "$SECURITY_RESULT" != failure
+          test "$SECURITY_RESULT" != cancelled
