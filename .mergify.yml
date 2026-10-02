@@ -27,6 +27,8 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-skipint-gate
     batch_size: 1
+    branch_protection_injection_mode: none
+    merge_bot_account: livastic-vm2-primary-20260911
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
