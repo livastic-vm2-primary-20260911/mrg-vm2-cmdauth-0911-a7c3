@@ -49,7 +49,6 @@ queue_rules:
     batch_size: 2
     merge_method: merge-batch
     branch_protection_injection_mode: none
-    merge_bot_account: livastic-vm2-primary-20260911
     conflict_resolvers:
       - paths:
           - frontend/vm2-crprio-1002.txt
