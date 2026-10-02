@@ -28,5 +28,7 @@ jobs:
             echo 'VM2_SKIPINT_DOWNSTREAM_HEAL=1'
             exit 0
           fi
+          echo 'VM2_SKIPINT_ANCESTOR_PENDING=1'
+          sleep 120
           echo 'VM2_SKIPINT_ANCESTOR_FAIL=1'
           exit 1
