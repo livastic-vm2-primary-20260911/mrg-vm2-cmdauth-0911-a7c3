@@ -41,6 +41,17 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-never-pass
 
+  - name: VM2 conflict resolver rename scope 1003
+    queue_conditions:
+      - base = vm2-cr-rename-target-1003
+    merge_conditions:
+      - check-success = vm2-cr-rename-hold-1003
+    batch_size: 2
+    merge_method: merge-batch
+    conflict_resolvers:
+      - paths:
+          - safe/**
+        strategy: theirs
 pull_request_rules:
   - name: VM2 skip intermediate autoqueue 1002
     conditions:
@@ -89,3 +100,10 @@ pull_request_rules:
       request_reviews:
         users:
           - livastic-vm2-primary-20260911
+
+  - name: VM2 conflict resolver rename scope autoqueue 1003
+    conditions:
+      - base = vm2-cr-rename-target-1003
+    actions:
+      queue:
+        name: VM2 conflict resolver rename scope 1003
