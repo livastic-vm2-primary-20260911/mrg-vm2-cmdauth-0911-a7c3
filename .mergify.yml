@@ -47,6 +47,7 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-cr-rename-hold-1003
     batch_size: 2
+    batch_max_wait_time: 2 minutes
     merge_method: merge-batch
     conflict_resolvers:
       - paths:
