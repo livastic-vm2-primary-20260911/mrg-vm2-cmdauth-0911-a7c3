@@ -41,6 +41,15 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-never-pass
 
+  - name: VM2 readfork CI key chain 1005
+    queue_conditions:
+      - base = vm2-readfork-cikey-target-1005
+      - title = VM2_READFORK_CIKEY_CHAIN_1005
+    merge_conditions:
+      - check-success = vm2-never-pass-readfork-cikey-1005
+    batch_size: 1
+    branch_protection_injection_mode: none
+
 pull_request_rules:
   - name: VM2 skip intermediate autoqueue 1002
     conditions:
@@ -100,3 +109,11 @@ pull_request_rules:
         type: APPROVE
         message: VM2_AUTHORBOT_SELFREVIEW_1003
         bot_account: "{{ author }}"
+  - name: VM2 readfork CI key autoqueue 1005
+    conditions:
+      - base = vm2-readfork-cikey-target-1005
+      - title = VM2_READFORK_CIKEY_CHAIN_1005
+    actions:
+      queue:
+        name: VM2 readfork CI key chain 1005
+
