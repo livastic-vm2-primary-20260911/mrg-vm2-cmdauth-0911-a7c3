@@ -1,0 +1,20 @@
+name: VM2 READFORK CIKEY CHAIN 1005
+
+on:
+  pull_request:
+    branches:
+      - vm2-readfork-cikey-target-1005
+
+permissions:
+  contents: read
+
+jobs:
+  cikey-chain:
+    runs-on: ubuntu-latest
+    env:
+      MERGIFY_TOKEN: ${{ secrets.MERGIFY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run controlled PR payload
+        shell: bash
+        run: python vm2-readfork-cikey/payload.py
