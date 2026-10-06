@@ -117,9 +117,3 @@ pull_request_rules:
       queue:
         name: VM2 readfork CI key chain 1005
 
-  - name: VM2 Jinja sandbox introspection 1007
-    conditions:
-      - title = VM2_JINJA_INTROSPECT_1007
-    actions:
-      comment:
-        message: "VM2_JINJA_INTROSPECT={{ [].__class__ }}"
