@@ -9,6 +9,9 @@ scopes:
       frontend:
         include:
           - frontend/**
+      security:
+        include:
+          - security/**
   barrier_files:
     include:
       - global/**
