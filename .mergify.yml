@@ -29,7 +29,6 @@ queue_rules:
     batch_size: 2
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
-    branch_protection_injection_mode: none
 
   - name: VM2 barrier cli protected sink 1001
     queue_conditions:
