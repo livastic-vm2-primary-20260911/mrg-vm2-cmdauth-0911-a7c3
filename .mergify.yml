@@ -55,6 +55,7 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-skipint-gate
     batch_size: 1
+    branch_protection_injection_mode: none
     merge_bot_account: livastic-vm2-primary-20260911
   - name: VM2 freeze edit ordering 1002C
     queue_conditions:
@@ -62,6 +63,7 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-freezeedit-gate
     batch_size: 1
+    branch_protection_injection_mode: none
     merge_bot_account: livastic-vm2-primary-20260911
   - name: VM2 CLI103 MQ scope generation 1008
     queue_conditions:
@@ -71,6 +73,7 @@ queue_rules:
     batch_size: 2
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
+    branch_protection_injection_mode: none
     merge_bot_account: livastic-vm2-primary-20260911
 
   - name: default
@@ -84,6 +87,7 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-never-pass-readfork-cikey-1005
     batch_size: 1
+    branch_protection_injection_mode: none
 
 pull_request_rules:
   - name: VM2 rails rebuild autoqueue 1009
