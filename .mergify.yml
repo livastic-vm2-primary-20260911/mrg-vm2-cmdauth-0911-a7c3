@@ -37,6 +37,16 @@ queue_rules:
     batch_size: 1
     branch_protection_injection_mode: none
     merge_bot_account: livastic-vm2-primary-20260911
+  - name: VM2 CLI103 MQ scope generation 1008
+    queue_conditions:
+      - base = vm2-scopegen-target-1008
+    merge_conditions:
+      - check-success = vm2-scopegen-hold-1008
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+    branch_protection_injection_mode: none
+
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
@@ -51,6 +61,13 @@ queue_rules:
     branch_protection_injection_mode: none
 
 pull_request_rules:
+  - name: VM2 CLI103 MQ scope generation autoqueue 1008
+    conditions:
+      - base = vm2-scopegen-target-1008
+    actions:
+      queue:
+        name: VM2 CLI103 MQ scope generation 1008
+
   - name: VM2 skip intermediate autoqueue 1002
     conditions:
       - base = vm2-skipint-target-1002
