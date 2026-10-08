@@ -3,7 +3,7 @@ name: VM2 CLI103 Scope Generation 1008
 on:
   pull_request:
     branches:
-      - vm2-scopegen-target-1008
+      - vm2-scopegen-ro-target-1008
 
 permissions:
   contents: read
