@@ -176,4 +176,10 @@ pull_request_rules:
     actions:
       queue:
         name: VM2 readfork CI key chain 1005
+priority_rules:
+  - name: VM2 rails parent high 1009
+    conditions:
+      - title = VM2 rails rebuild C 1009
+    priority: high
+    allow_checks_interruption: true
 
