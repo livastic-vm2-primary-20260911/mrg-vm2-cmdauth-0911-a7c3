@@ -182,3 +182,4 @@ priority_rules:
       - title = VM2 rails rebuild C 1009
     priority: high
     allow_checks_interruption: true
+
