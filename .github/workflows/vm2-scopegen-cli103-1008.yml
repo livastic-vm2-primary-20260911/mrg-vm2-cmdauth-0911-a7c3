@@ -1,0 +1,63 @@
+name: VM2 CLI103 Scope Generation 1008
+
+on:
+  pull_request:
+    branches:
+      - vm2-scopegen-target-1008
+
+permissions:
+  contents: read
+
+jobs:
+  detect-scopes:
+    name: VM2 CLI103 Detect Scopes 1008
+    runs-on: ubuntu-24.04
+    outputs:
+      security: ${{ fromJSON(steps.scopes.outputs.scopes).security }}
+      frontend: ${{ fromJSON(steps.scopes.outputs.scopes).frontend }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Detect scopes with official CLI 2026.10.3
+        id: scopes
+        uses: Mergifyio/gha-mergify-ci@v25
+        with:
+          action: scopes
+          mergify_cli_version: 2026.10.3
+      - name: Show scope decision
+        env:
+          RAW: ${{ steps.scopes.outputs.scopes }}
+          SECURITY: ${{ fromJSON(steps.scopes.outputs.scopes).security }}
+          FRONTEND: ${{ fromJSON(steps.scopes.outputs.scopes).frontend }}
+        run: |
+          echo "VM2_SCOPEGEN_JSON=$RAW"
+          echo "VM2_SCOPEGEN_SECURITY=$SECURITY"
+          echo "VM2_SCOPEGEN_FRONTEND=$FRONTEND"
+
+  security-guard:
+    name: VM2 CLI103 Security Guard 1008
+    needs: detect-scopes
+    if: ${{ needs.detect-scopes.outputs.security == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - run: |
+          echo 'VM2_SCOPEGEN_SECURITY_GUARD_RAN=true'
+          exit 1
+
+  scope-gate:
+    name: VM2 CLI103 Scope Gate 1008
+    if: ${{ !cancelled() }}
+    needs:
+      - detect-scopes
+      - security-guard
+    runs-on: ubuntu-24.04
+    steps:
+      - env:
+          DETECT: ${{ needs.detect-scopes.result }}
+          SECURITY_GUARD: ${{ needs.security-guard.result }}
+        run: |
+          echo "detect=$DETECT security_guard=$SECURITY_GUARD"
+          test "$DETECT" = success
+          test "$SECURITY_GUARD" != failure
+          test "$SECURITY_GUARD" != cancelled
