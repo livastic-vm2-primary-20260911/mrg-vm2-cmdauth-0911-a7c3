@@ -46,6 +46,7 @@ queue_rules:
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
     branch_protection_injection_mode: none
+    merge_bot_account: livastic-vm2-primary-20260911
 
   - name: default
     merge_conditions:
