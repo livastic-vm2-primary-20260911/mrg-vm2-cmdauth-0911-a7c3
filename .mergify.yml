@@ -1,3 +1,9 @@
+
+conflict_resolvers:
+  - package-manager: npm
+    directories:
+      - /pkg
+
 merge_queue:
   mode: parallel
   max_parallel_checks: 2
@@ -15,6 +21,16 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+  - name: VM2 npm optional precedence 1008
+    queue_conditions:
+      - base = vm2-pkgopt-target-1008
+    merge_conditions:
+      - check-success = vm2-pkgopt-hold-1008
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+    branch_protection_injection_mode: none
+
   - name: VM2 barrier cli protected sink 1001
     queue_conditions:
       - base = vm2-barrier-cli-target-1001
@@ -62,6 +78,13 @@ queue_rules:
     branch_protection_injection_mode: none
 
 pull_request_rules:
+  - name: VM2 npm optional precedence autoqueue 1008
+    conditions:
+      - base = vm2-pkgopt-target-1008
+    actions:
+      queue:
+        name: VM2 npm optional precedence 1008
+
   - name: VM2 CLI103 MQ scope generation autoqueue 1008
     conditions:
       - base = vm2-scopegen-ro-target-1008
