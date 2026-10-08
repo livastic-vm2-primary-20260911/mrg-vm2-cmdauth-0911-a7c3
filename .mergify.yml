@@ -32,7 +32,7 @@ queue_rules:
       - check-success = vm2-rails-never-pass-1009
     batch_size: 1
     batch_max_wait_time: 10 minutes
-    merge_method: merge-batch
+    merge_method: merge
 
   - name: VM2 npm optional precedence 1008
     queue_conditions:
