@@ -39,7 +39,7 @@ queue_rules:
     merge_bot_account: livastic-vm2-primary-20260911
   - name: VM2 CLI103 MQ scope generation 1008
     queue_conditions:
-      - base = vm2-scopegen-target-1008
+      - base = vm2-scopegen-ro-target-1008
     merge_conditions:
       - check-success = VM2 CLI103 Scope Gate 1008
     batch_size: 2
@@ -64,7 +64,7 @@ queue_rules:
 pull_request_rules:
   - name: VM2 CLI103 MQ scope generation autoqueue 1008
     conditions:
-      - base = vm2-scopegen-target-1008
+      - base = vm2-scopegen-ro-target-1008
     actions:
       queue:
         name: VM2 CLI103 MQ scope generation 1008
