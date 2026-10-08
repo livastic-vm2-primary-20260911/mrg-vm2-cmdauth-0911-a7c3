@@ -3,6 +3,9 @@ conflict_resolvers:
   - package-manager: npm
     directories:
       - /pkg
+  - paths:
+      - db/schema.rb
+    strategy: rails-schema
 
 merge_queue:
   mode: parallel
@@ -21,6 +24,17 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+  - name: VM2 rails rebuild freshness 1009
+    queue_conditions:
+      - base = vm2-rails-rebuild-target-1009
+    merge_conditions:
+      - check-success = vm2-rails-rebuild-gate-1009
+      - check-success = vm2-rails-never-pass-1009
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+    branch_protection_injection_mode: none
+
   - name: VM2 npm optional precedence 1008
     queue_conditions:
       - base = vm2-pkgopt-target-1008
@@ -77,6 +91,13 @@ queue_rules:
     branch_protection_injection_mode: none
 
 pull_request_rules:
+  - name: VM2 rails rebuild autoqueue 1009
+    conditions:
+      - base = vm2-rails-rebuild-target-1009
+    actions:
+      queue:
+        name: VM2 rails rebuild freshness 1009
+
   - name: VM2 npm optional precedence autoqueue 1008
     conditions:
       - base = vm2-pkgopt-target-1008
