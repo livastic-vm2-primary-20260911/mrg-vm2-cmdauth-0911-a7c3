@@ -24,15 +24,6 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
-  - name: VM2 package-manager manifest symlink scope 1009
-    queue_conditions:
-      - base = vm2-pm-manifest-symlink-target-1009
-    merge_conditions:
-      - check-success = vm2-pm-manifest-symlink-never-1009
-    batch_size: 2
-    batch_max_wait_time: 10 minutes
-    merge_method: merge-batch
-
   - name: VM2 rails rebuild freshness 1009
     queue_conditions:
       - base = vm2-rails-rebuild-target-1009
@@ -99,13 +90,6 @@ queue_rules:
     branch_protection_injection_mode: none
 
 pull_request_rules:
-  - name: VM2 package-manager manifest symlink autoqueue 1009
-    conditions:
-      - base = vm2-pm-manifest-symlink-target-1009
-    actions:
-      queue:
-        name: VM2 package-manager manifest symlink scope 1009
-
   - name: VM2 rails rebuild autoqueue 1009
     conditions:
       - base = vm2-rails-rebuild-target-1009
