@@ -3,6 +3,6 @@ revision = 5
 requires-python = ">=3.12"
 
 [[package]]
-name = "vm2-build-backend-cross"
+name = "vm2-build-backend-empty"
 version = "0.0.1"
 source = { editable = "." }
