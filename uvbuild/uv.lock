@@ -1,8 +1,14 @@
 version = 1
 revision = 5
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 
 [[package]]
-name = "vm2-build-backend-empty"
-version = "0.0.1"
-source = { editable = "." }
+name = "vm2-depgroups-1010"
+version = "0.0.0"
+source = { virtual = "." }
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+extra = []
+trusted = []
