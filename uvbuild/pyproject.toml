@@ -1,0 +1,13 @@
+[project]
+name = "vm2-build-backend-cross"
+version = "0.0.1"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vm2pkg"]
