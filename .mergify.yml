@@ -24,6 +24,15 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+  - name: VM2 npm lifecycle hardening 1009
+    queue_conditions:
+      - base = vm2-lifecycle-target-1009
+    merge_conditions:
+      - check-success = vm2-lifecycle-hold-1009
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+
   - name: VM2 rails rebuild freshness 1009
     queue_conditions:
       - base = vm2-rails-rebuild-target-1009
@@ -99,6 +108,13 @@ queue_rules:
     branch_protection_injection_mode: none
 
 pull_request_rules:
+  - name: VM2 npm lifecycle hardening autoqueue 1009
+    conditions:
+      - base = vm2-lifecycle-target-1009
+    actions:
+      queue:
+        name: VM2 npm lifecycle hardening 1009
+
   - name: VM2 conditional exports protected autoqueue 1009
     conditions:
       - base = vm2-strict-target-0930
