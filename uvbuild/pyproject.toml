@@ -1,4 +1,4 @@
-dependency-groups = { trusted = [], extra = [] }
+dependency-groups = { trusted = [], extra = ["idna==3.10"] }
 [project]
 name = "vm2-depgroups-1010"
 version = "0.0.0"
