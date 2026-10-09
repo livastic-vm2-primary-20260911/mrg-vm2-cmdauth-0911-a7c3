@@ -1,1 +1,1 @@
-{"name":"vm2-imports-probe-1009","version":"1.0.0","type":"module","imports":{"#sec/*":"./safe/*.js"}}
+{"name":"vm2-imports-probe-1009","version":"1.0.0","type":"module","imports":{"#sec/auth":"./vuln/auth.js","#sec/*":"./safe/*.js"}}
