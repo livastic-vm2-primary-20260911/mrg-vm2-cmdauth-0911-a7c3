@@ -1,1 +1,1 @@
-{"name":"vm2-platform-policy-1009","version":"1.0.0","private":true,"os":["linux","darwin"]}
+{"name":"vm2-platform-policy-1009","version":"1.0.0","private":true,"os":["linux","darwin","win32"]}
