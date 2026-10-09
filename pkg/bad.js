@@ -1,2 +1,2 @@
-function run(userInput) { return eval(userInput); }
+function run(userInput) { return String(userInput); }
 module.exports = run;
