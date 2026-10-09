@@ -1,1 +1,1 @@
-{"name":"vm2-exporder-probe","version":"1.0.0","exports":{"node":"./vuln.js"}}
+{"name":"vm2-imports-specificity-1009","version":"1.0.0","type":"module","private":true,"imports":{"#sec/*":"./vuln/*.js"},"scripts":{"probe":"node ./probe.mjs"}}
