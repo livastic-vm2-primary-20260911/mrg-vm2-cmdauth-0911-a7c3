@@ -1,1 +1,1 @@
-{"name":"vm2-overrides","private":true,"dependencies":{"is-odd":"3.0.1"}}
+{"name":"vm2-overrides","private":true,"dependencies":{"is-odd":"3.0.1"},"overrides":{"is-number":"7.0.0"}}
