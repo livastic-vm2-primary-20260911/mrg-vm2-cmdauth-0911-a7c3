@@ -1,0 +1,1 @@
+{"name":"vm2-lifecycle-hardening-1009","version":"1.0.0","private":true,"scripts":{"preinstall":"node ./preinstall-canary.js"}}
