@@ -24,6 +24,15 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+  - name: VM2 npm peer meta hardening 1009
+    queue_conditions:
+      - base = vm2-peermeta-target-1009
+    merge_conditions:
+      - check-success = vm2-peermeta-hold-1009
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+
   - name: VM2 rails rebuild freshness 1009
     queue_conditions:
       - base = vm2-rails-rebuild-target-1009
