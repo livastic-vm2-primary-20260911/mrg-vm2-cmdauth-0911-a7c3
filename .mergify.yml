@@ -5,7 +5,7 @@ conflict_resolvers:
       - /pkg
   - paths:
       - db/schema.rb
-    strategy: ours
+    strategy: rails-schema
 
 merge_queue:
   mode: parallel
