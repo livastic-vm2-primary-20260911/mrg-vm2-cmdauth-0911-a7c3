@@ -47,6 +47,10 @@ queue_rules:
     batch_size: 2
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
+    conflict_resolvers:
+      - paths:
+          - tsfilter/policy.ts
+        strategy: typescript
 
   - name: VM2 ESLint security policy cross 1010
     queue_conditions:
