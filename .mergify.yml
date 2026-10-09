@@ -78,9 +78,9 @@ queue_rules:
 
   - name: VM2 conditional exports protected 1009
     queue_conditions:
-      - base = vm2-exporder-protected-target-1009
+      - base = vm2-strict-target-0930
     merge_conditions:
-      - check-success = vm2-exporder-protected-gate-1009
+      - check-success = vm2-strict-gate-0930
     batch_size: 2
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
@@ -101,7 +101,7 @@ queue_rules:
 pull_request_rules:
   - name: VM2 conditional exports protected autoqueue 1009
     conditions:
-      - base = vm2-exporder-protected-target-1009
+      - base = vm2-strict-target-0930
     actions:
       queue:
         name: VM2 conditional exports protected 1009
