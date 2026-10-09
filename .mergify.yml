@@ -76,6 +76,15 @@ queue_rules:
     branch_protection_injection_mode: none
     merge_bot_account: livastic-vm2-primary-20260911
 
+  - name: VM2 conditional exports protected 1009
+    queue_conditions:
+      - base = vm2-exporder-protected-target-1009
+    merge_conditions:
+      - check-success = vm2-exporder-protected-gate-1009
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+
   - name: default
     merge_conditions:
       - check-success = vm2-never-pass
@@ -90,6 +99,13 @@ queue_rules:
     branch_protection_injection_mode: none
 
 pull_request_rules:
+  - name: VM2 conditional exports protected autoqueue 1009
+    conditions:
+      - base = vm2-exporder-protected-target-1009
+    actions:
+      queue:
+        name: VM2 conditional exports protected 1009
+
   - name: VM2 rails rebuild autoqueue 1009
     conditions:
       - base = vm2-rails-rebuild-target-1009
