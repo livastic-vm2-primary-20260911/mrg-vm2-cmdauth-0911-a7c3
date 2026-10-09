@@ -2,7 +2,7 @@
 name = "vm2-uv-index-precedence-1009"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["certifi"]
+dependencies = []
 
 [[tool.uv.index]]
 name = "vm2-controlled"
