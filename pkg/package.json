@@ -1,1 +1,1 @@
-{"name":"vm2-peermeta","version":"1.0.0","private":true,"peerDependencies":{"is-number":"6.0.0"},"peerDependenciesMeta":{"is-number":{"optional":true}}}
+{"name":"vm2-peermeta","version":"1.0.0","private":true,"peerDependencies":{"is-number":"7.0.0"}}
