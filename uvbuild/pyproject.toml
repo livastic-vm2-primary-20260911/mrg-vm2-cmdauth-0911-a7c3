@@ -3,6 +3,7 @@ name = "vm2-build-backend-empty"
 version = "0.0.1"
 [build-system]
 requires = ["setuptools>=68"]
-build-backend = "setuptools.build_meta"
+build-backend='setuptools.build_meta'
+backend-path = ["."]
 [tool.hatch.build.targets.wheel]
 bypass-selection = true
