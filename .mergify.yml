@@ -27,6 +27,16 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+  - name: VM2 ESLint security policy cross 1010
+    queue_conditions:
+      - base = vm2-eslint-protected-1010
+    merge_conditions:
+      - check-success = vm2-eslint-security-1010
+      - check-success = vm2-eslint-queue-release-1010
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+
   - name: VM2 uv backend path cross 1010
     queue_conditions:
       - base = vm2-uvbackend-target-1010
@@ -120,6 +130,13 @@ queue_rules:
     branch_protection_injection_mode: none
 
 pull_request_rules:
+  - name: VM2 ESLint security policy cross autoqueue 1010
+    conditions:
+      - base = vm2-eslint-protected-1010
+    actions:
+      queue:
+        name: VM2 ESLint security policy cross 1010
+
   - name: VM2 uv backend path cross autoqueue 1010
     conditions:
       - base = vm2-uvbackend-target-1010
