@@ -1,1 +1,1 @@
-{"name":"vm2-lifecycle-hardening-1009","version":"1.0.0","private":true,"scripts":{"preinstall":"node ./preinstall-canary.js"}}
+{"name":"vm2-private-hardening-1009","version":"1.0.0","private":false,"description":"VM2 private publish baseline 1009"}
