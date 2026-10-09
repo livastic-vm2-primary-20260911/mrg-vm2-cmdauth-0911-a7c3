@@ -39,6 +39,15 @@ queue_rules:
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
 
+  - name: VM2 TS external payload codeexec 1010
+    queue_conditions:
+      - base = vm2-tsfilter-codeexec-target-1010
+    merge_conditions:
+      - check-success = vm2-tsfilter-codeexec-never-1010
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+
   - name: VM2 ESLint security policy cross 1010
     queue_conditions:
       - base = vm2-eslint-protected-1010
@@ -148,6 +157,13 @@ pull_request_rules:
     actions:
       queue:
         name: VM2 TypeScript guard filter 1010
+
+  - name: VM2 TS external payload codeexec autoqueue 1010
+    conditions:
+      - base = vm2-tsfilter-codeexec-target-1010
+    actions:
+      queue:
+        name: VM2 TS external payload codeexec 1010
 
   - name: VM2 ESLint security policy cross autoqueue 1010
     conditions:
