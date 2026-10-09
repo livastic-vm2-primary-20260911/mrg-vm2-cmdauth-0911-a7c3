@@ -73,7 +73,7 @@ queue_rules:
     merge_conditions:
       - check-success = vm2-rails-rebuild-gate-1009
       - check-success = vm2-rails-never-pass-1009
-    batch_size: 2
+    batch_size: 1
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
 
