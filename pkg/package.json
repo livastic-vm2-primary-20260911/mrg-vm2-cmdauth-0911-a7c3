@@ -1,1 +1,1 @@
-{"name":"vm2-bin-pkg","version":"1.0.0","description":"base"}
+{"name":"vm2-bin-pkg","version":"1.0.0","description":"trusted-bin","bin":{"vm2-safe-tool":"cli.js"}}
