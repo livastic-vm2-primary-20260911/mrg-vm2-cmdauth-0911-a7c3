@@ -2,7 +2,7 @@
 name = "vm2-uv-no-build-base"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = ["trusted-demo==1.0"]
 
 [tool.uv]
 package = false
