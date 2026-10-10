@@ -1,9 +1,6 @@
 conflict_resolvers:
   - package-manager: npm
     directories:
-      - /
-  - package-manager: npm
-    directories:
       - /pkg
   - package-manager: uv
     directories:
@@ -31,16 +28,6 @@ queue_rules:
       - base = vm2-eslint-protected-1010
     merge_conditions:
       - check-success = vm2-eslint-security-1010
-    batch_size: 2
-    batch_max_wait_time: 10 minutes
-    merge_method: merge-batch
-    autoqueue: true
-
-  - name: VM2 package root special scope 1011
-    queue_conditions:
-      - base = vm2-pkgroot-target-1011
-    merge_conditions:
-      - check-success = vm2-pkgroot-hold-never-1011
     batch_size: 2
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
