@@ -21,3 +21,14 @@ scopes:
     include:
       - global/**
       - .github/workflows/**
+
+queue_rules:
+  - name: VM2 eslint protected crossproduct 1010
+    queue_conditions:
+      - base = vm2-eslint-protected-1010
+    merge_conditions:
+      - check-success = vm2-eslint-security-1010
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+    autoqueue: true
