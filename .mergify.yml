@@ -5,9 +5,6 @@ conflict_resolvers:
   - package-manager: uv
     directories:
       - /uvbuild
-  - paths:
-      - jsonescape/policy.json
-    strategy: json
 
 merge_queue:
   mode: parallel
@@ -24,14 +21,3 @@ scopes:
     include:
       - global/**
       - .github/workflows/**
-
-queue_rules:
-  - name: VM2 json escaped key canonicalization 1010
-    queue_conditions:
-      - base = vm2-jsonescape-target-1010
-    merge_conditions:
-      - check-success = vm2-jsonescape-never-1010
-    batch_size: 2
-    batch_max_wait_time: 10 minutes
-    merge_method: merge-batch
-    autoqueue: true
