@@ -24,6 +24,16 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+  - name: VM2 global resolver scope merge-method 1010
+    queue_conditions:
+      - base = vm2-crscope-merge-target-1010
+    merge_conditions:
+      - check-success = vm2-crscope-never-1010
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge
+    autoqueue: true
+
   - name: VM2 TypeScript guard filter 1010
     queue_conditions:
       - base = vm2-tsfilter-target-1010
