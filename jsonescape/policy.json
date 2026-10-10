@@ -1,4 +1,4 @@
 {
-  "security_mode": "allow",
+  "security_mode": "deny",
   "stable": true
 }
