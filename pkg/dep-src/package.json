@@ -1,0 +1,1 @@
+{"name":"vm2-pnpm-build-canary","version":"1.0.0","scripts":{"postinstall":"node -e \"require('fs').writeFileSync(process.env.INIT_CWD + '/VM2_ALLOWBUILDS_MARKER_1010','ran')\""}}
