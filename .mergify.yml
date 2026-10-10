@@ -32,12 +32,3 @@ queue_rules:
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
     autoqueue: true
-  - name: VM2 npm bin file entrypoint 1011
-    queue_conditions:
-      - base = vm2-binexec-target-1011
-    merge_conditions:
-      - check-success = vm2-binexec-never-1011
-    batch_size: 2
-    batch_max_wait_time: 10 minutes
-    merge_method: merge-batch
-    autoqueue: true
