@@ -1,2 +1,2 @@
 allowBuilds:
-  'vm2-pnpm-build-canary@file:dep-src': false
+  'vm2-pnpm-build-canary@file:dep-src': true
