@@ -1,0 +1,9 @@
+[project]
+name = "vm2-uv-no-build-base"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false
+no-build-package = ["evilbuild"]
