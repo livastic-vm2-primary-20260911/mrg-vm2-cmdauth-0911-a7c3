@@ -1,6 +1,9 @@
 conflict_resolvers:
   - package-manager: npm
     directories:
+      - /café
+  - package-manager: npm
+    directories:
       - /pkg
   - package-manager: uv
     directories:
@@ -23,6 +26,16 @@ scopes:
       - .github/workflows/**
 
 queue_rules:
+
+  - name: VM2 package unicode directory scope 1011
+    queue_conditions:
+      - base = vm2-pmuni-target-1011
+    merge_conditions:
+      - check-success = vm2-pmuni-hold-never-1011
+    batch_size: 2
+    batch_max_wait_time: 10 minutes
+    merge_method: merge-batch
+    autoqueue: true
   - name: VM2 eslint protected crossproduct 1010
     queue_conditions:
       - base = vm2-eslint-protected-1010
