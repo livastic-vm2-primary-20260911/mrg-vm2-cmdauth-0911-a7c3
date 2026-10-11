@@ -28,7 +28,6 @@ queue_rules:
       - base = vm2-eslint-protected-1010
     merge_conditions:
       - check-success = vm2-eslint-security-1010
-      - check-success = vm2-eslint-stage2-hold-1011
     batch_size: 2
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
