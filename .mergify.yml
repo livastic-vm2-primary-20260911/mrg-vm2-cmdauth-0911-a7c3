@@ -32,13 +32,3 @@ queue_rules:
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
     autoqueue: true
-
-  - name: VM2 package type module dormant 1011
-    queue_conditions:
-      - base = vm2-pm-type-target-1011
-    merge_conditions:
-      - check-success = vm2-pm-type-hold-never-1011
-    batch_size: 2
-    batch_max_wait_time: 10 minutes
-    merge_method: merge-batch
-    autoqueue: true
