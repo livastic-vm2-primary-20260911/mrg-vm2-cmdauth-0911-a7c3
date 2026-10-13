@@ -32,3 +32,15 @@ queue_rules:
     batch_max_wait_time: 10 minutes
     merge_method: merge-batch
     autoqueue: true
+
+pull_request_rules:
+  - name: VM2 Gate1 Root92 only current controlled PR348
+    conditions:
+      - base = vm2-gate1-label-base-261013-w8e2
+      - author = onecursor3-gif
+      - title = VM2_GATE1_LABEL_TRIGGER_W8E2
+      - label = vm2-gate1-owner-only-261013-w8e2
+    actions:
+      label:
+        add:
+          - vm2-gate1-bot-canary-261013-w8e2
