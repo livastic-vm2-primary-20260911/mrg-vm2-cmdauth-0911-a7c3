@@ -1,0 +1,1 @@
+VM2 Gate1 existing Root47 review-requested current reviewer permissions, harmless canary. No workflow, secret, or protected merge.
