@@ -1,0 +1,1 @@
+VM2 Gate1 Root34 public dependency-status oracle controlled check. Inert text only; no private canary here.
