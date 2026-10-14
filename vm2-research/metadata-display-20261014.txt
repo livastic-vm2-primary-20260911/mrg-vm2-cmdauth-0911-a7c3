@@ -1,0 +1,3 @@
+VM2 authorized cross-fork PR metadata rendering probe, 2026-10-14.
+No executable code, workflows, secrets, or production changes.
+The pull request must remain unmerged and will be closed after observation.
