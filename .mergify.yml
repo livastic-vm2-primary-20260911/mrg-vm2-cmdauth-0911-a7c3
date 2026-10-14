@@ -1,34 +1,11 @@
-conflict_resolvers:
-  - package-manager: npm
-    directories:
-      - /pkg
-  - package-manager: uv
-    directories:
-      - /uvbuild
+extends: mrg-vm2-playwright-gate-0920-e2e
 
-merge_queue:
-  mode: parallel
-  max_parallel_checks: 2
-  skip_intermediate_results: true
-
-scopes:
-  source:
-    files:
-      frontend:
-        include:
-          - frontend/**
-  barrier_files:
-    include:
-      - global/**
-      - .github/workflows/**
-
-queue_rules:
-  - name: VM2 eslint protected crossproduct 1010
-    queue_conditions:
-      - base = vm2-eslint-protected-1010
-    merge_conditions:
-      - check-success = vm2-eslint-security-1010
-    batch_size: 2
-    batch_max_wait_time: 10 minutes
-    merge_method: merge-batch
-    autoqueue: true
+pull_request_rules:
+  - name: VM2 inert fork-origin validation canary E12
+    conditions:
+      - base = main
+      - title ~= VM2_EXTENDS_ORIGIN_E12
+    actions:
+      label:
+        add:
+          - vm2-extends-origin-e12
