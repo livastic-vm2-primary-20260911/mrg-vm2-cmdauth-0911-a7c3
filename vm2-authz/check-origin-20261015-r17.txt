@@ -1,0 +1,2 @@
+VM2 controlled GitHub App check-origin isolation test 2026-10-15 (R17).
+This file is inert and must not be merged. Fork author controls only this branch and their fork check status.
