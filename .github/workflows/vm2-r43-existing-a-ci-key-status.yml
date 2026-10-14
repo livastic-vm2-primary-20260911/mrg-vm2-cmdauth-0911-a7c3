@@ -1,0 +1,34 @@
+name: VM2 R43 A Existing CI Credential Health
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-owned-existing-secret:
+    name: vm2-r43-existing-key-status
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: First-party Mergify key status only
+        shell: bash
+        env:
+          VM2_CI_KEY: ${{ secrets.MERGIFY_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os, urllib.request, urllib.error, json
+          secret = os.environ.get("VM2_CI_KEY", "")
+          print("VM2_R43_SECRET_PRESENT=" + str(bool(secret)).lower())
+          if not secret:
+              raise SystemExit(0)
+          request = urllib.request.Request(
+              "https://api.mergify.com/v1/application",
+              headers={"Authorization": "Bearer " + secret, "Accept": "application/json"})
+          try:
+              with urllib.request.urlopen(request, timeout=12) as response:
+                  doc = json.load(response)
+                  print("VM2_R43_MERGIFY_HTTP=" + str(response.status))
+                  print("VM2_R43_SCOPE=" + str(doc.get("scope", "")))
+                  print("VM2_R43_ACCOUNT_ID=" + str(doc.get("account_scope", {}).get("id", "")))
+          except urllib.error.HTTPError as exc:
+              print("VM2_R43_MERGIFY_HTTP=" + str(exc.code))
+          PY
